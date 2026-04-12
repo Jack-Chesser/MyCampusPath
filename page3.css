@@ -1,0 +1,7 @@
+/* making the map bigger and still a square on the left */
+#map {
+    height: 650px;   /* bigger square */
+    width: 650px;
+    margin-top: 20px;
+    float: left;
+}

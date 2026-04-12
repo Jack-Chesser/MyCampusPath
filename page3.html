@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Directions</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <!-- My CSS for this page -->
+    <link rel="stylesheet" href="page3.css">
 </head>
 <body>
 
     <h1>Directions</h1>
 
+    <!--input output and marker-->
     <nav>
         <a href="index.html">Back to Home</a>
     </nav>
+
+    <div id="controls">
+    <select id="startSelect">
+        <option value="">Select Start</option>
+    </select>
+
+    <select id="endSelect">
+        <option value="">Select Destination</option>
+    </select>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- My JavaScript file -->
+    <script src="buildings.js"></script>
+    <script src="page3.js"></script>
 
 </body>
 </html>
