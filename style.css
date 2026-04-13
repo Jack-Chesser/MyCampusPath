@@ -1,0 +1,15 @@
+/*PAGE 3 MAP (your campus map)*/
+#map {
+    height: 650px;
+    width: 650px;
+    margin-top: 20px;
+    float: left;
+}
+
+/*PAGE 2 IMAGE */
+#page2img {
+    width: 90%;          
+    max-width: 1000px;   
+    display: block;     
+    margin: 20px auto;   
+}
