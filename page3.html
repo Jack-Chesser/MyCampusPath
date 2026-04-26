@@ -14,22 +14,43 @@
 
     <h1>Directions</h1>
 
-    <!--input output and marker-->
     <nav>
         <a href="index.html">Back to Home</a>
     </nav>
 
-    <div id="controls">
-    <select id="startSelect">
-        <option value="">Select Start</option>
-    </select>
+    <!-- MAP + RIGHT SIDEBAR -->
+    <div id="mapAndSidebar">
 
-    <select id="endSelect">
-        <option value="">Select Destination</option>
-    </select>
+        <!-- LEFT SIDE: MAP -->
+        <div id="map"></div>
+
+        <!-- RIGHT SIDE: INPUTS + WEATHER -->
+        <div id="sidebar">
+
+            <div id="controls">
+                <select id="startSelect">
+                    <option value="">Select Start</option>
+                </select>
+
+                <select id="endSelect">
+                    <option value="">Select Destination</option>
+                </select>
+            </div>
+
+            <div id="weatherBox">
+                <h3>Jacksonville Weather</h3>
+                <p id="temp">Loading...</p>
+                <p id="wind">Loading...</p>
+                <p id="condition">Loading...</p>
+            </div>
+
+            
+            <div id="walkBox">
+                <h3>Estimated Walk Time</h3>
+                <p id="walkDistance">Distance: --</p>
+                <p id="walkTime">Time: --</p>
+            </div>
     </div>
-
-    <div id="map"></div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -38,5 +59,11 @@
     <script src="buildings.js"></script>
     <script src="page3.js"></script>
 
+    
+</div>
+
 </body>
 </html>
+
+
+

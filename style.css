@@ -1,15 +1,83 @@
-/*PAGE 3 MAP (your campus map)*/
+/* PAGE 3 MAP */
 #map {
     height: 650px;
     width: 650px;
     margin-top: 20px;
     float: left;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/*PAGE 2 IMAGE */
+/* PAGE 2 IMAGE */
 #page2img {
-    width: 90%;          
-    max-width: 1000px;   
-    display: block;     
-    margin: 20px auto;   
+    width: 90%;
+    max-width: 1000px;
+    display: block;
+    margin: 20px auto;
+}
+
+/* WEATHER BOX (basic look) */
+#weatherBox {
+    width: 250px;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+}
+
+#weatherBox h3 {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* MAIN LAYOUT: map on the left, sidebar on the right */
+#mapAndSidebar {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* RIGHT SIDEBAR (inputs + weather stacked) */
+#sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* INPUT BOX (start + end dropdowns) */
+#controls {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+}
+
+/* Dropdown styling */
+#controls select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    font-size: 15px;
+}
+
+/* Walk time box (same style as weather + controls) */
+#walkBox {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+}
+
+#walkBox h3 {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold;
 }
