@@ -3,18 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>My Campus Path</title>
+
+    <!-- bootstrap stuff -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- my css file -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-    <h1>My Campus Path</h1>
+<body class="container mt-4">
 
-    <h3>Navigation</h3>
+    <!-- this checks if high contrast was turned on before -->
+    <script>
+        if (localStorage.getItem("contrastMode") === "on") {
+            document.documentElement.classList.add("highContrast");
+        }
+    </script>
 
-    <ul>
-        <li><a href="page2.html">Events</a></li>
-        <li><a href="page3.html">Directions</a></li>
-        <li><a href="https://www.ic.edu">Illinois College Website</a></li>
-    </ul>
+    <!-- button to toggle high contrast -->
+    <button id="contrastToggle" class="btn btn-dark mb-3">Toggle High Contrast</button>
+
+    <!-- header box -->
+    <div class="card p-4 mb-4">
+        <h1 class="text-center mb-3">My Campus Path</h1>
+        <p class="text-center">
+            A simple tool to view campus events, get directions between buildings, and check Jacksonville weather.
+        </p>
+    </div>
+
+    <!-- nav box -->
+    <div class="card p-4 mb-4">
+        <h2 class="mb-3">Navigation</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="page2.html">Campus Events</a></li>
+            <li class="list-group-item"><a href="page3.html">Directions & Weather</a></li>
+            <li class="list-group-item"><a href="https://www.ic.edu" target="_blank">Illinois College Website</a></li>
+        </ul>
+    </div>
+
+    <!-- weekly schedule -->
+    <div class="infoBox mt-4 p-4">
+        <h2>This Week's Schedule</h2>
+
+        <!-- grid of days -->
+        <div id="weekGrid">
+
+            <div class="dayBox p-2">
+                <strong>Sunday</strong>
+                <p>No events</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Monday</strong>
+                <p>• Finals – Monday–Friday</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Tuesday</strong>
+                <p>• Finals – Monday–Friday</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Wednesday</strong>
+                <p>• Finals – Monday–Friday</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Thursday</strong>
+                <p>• Finals – Monday–Friday</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Friday</strong>
+                <p>• Finals – Monday–Friday</p>
+                <p>• Last Day to Leave – Friday @ 5 PM</p>
+            </div>
+
+            <div class="dayBox p-2">
+                <strong>Saturday</strong>
+                <p>No events</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- this is the script that actually toggles high contrast -->
+    <script>
+        const contrastBtn = document.getElementById("contrastToggle");
+
+        // only run this if the button exists (it does)
+        if (contrastBtn) {
+            contrastBtn.addEventListener("click", function () {
+
+                // flip the class on/off
+                document.documentElement.classList.toggle("highContrast");
+
+                // save it so it stays when switching pages
+                if (document.documentElement.classList.contains("highContrast")) {
+                    localStorage.setItem("contrastMode", "on");
+                } else {
+                    localStorage.setItem("contrastMode", "off");
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>

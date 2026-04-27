@@ -1,5 +1,6 @@
 // ===============================
 // FEATURED EVENTS (static)
+// these are the ones that always show up
 // ===============================
 let featuredEvents = [
     "Finals – Monday–Friday",
@@ -8,28 +9,30 @@ let featuredEvents = [
 
 // ===============================
 // LOAD SAVED REQUESTS
+// pulling from localStorage so your requests stay forever
 // ===============================
 let savedRequests = JSON.parse(localStorage.getItem("eventRequests")) || [];
 
-// Render saved requests
+// render the saved requests on the page
 function renderRequests() {
     const list = document.getElementById("requestedEvents");
-    list.innerHTML = "";
+    list.innerHTML = ""; // clear so we don't double-add stuff
 
     savedRequests.forEach((eventName, index) => {
         let li = document.createElement("li");
-        li.textContent = "• " + eventName;
+        li.textContent = "" + eventName; // bullet point like the others
 
-        // Delete button
+        // delete button (the little red X)
         let del = document.createElement("span");
-        del.textContent = "✖";
+        del.textContent = "X";
         del.className = "deleteBtn";
 
+        // delete event when clicked
         del.addEventListener("click", function() {
             if (confirm("Delete this event request?")) {
-                savedRequests.splice(index, 1);
-                localStorage.setItem("eventRequests", JSON.stringify(savedRequests));
-                renderRequests();
+                savedRequests.splice(index, 1); // remove from array
+                localStorage.setItem("eventRequests", JSON.stringify(savedRequests)); // save updated list
+                renderRequests(); // refresh list
             }
         });
 
@@ -38,26 +41,33 @@ function renderRequests() {
     });
 }
 
+// run once on page load
 renderRequests();
 
 
 // ===============================
 // ADD NEW REQUEST
+// this handles the input box + button
 // ===============================
 document.getElementById("addEventBtn").addEventListener("click", function() {
     let input = document.getElementById("eventInput");
-    let eventName = input.value.trim();
+    let eventName = input.value.trim(); // remove extra spaces
 
-    if (eventName === "") return;
+    if (eventName === "") return; // don't add empty stuff
 
-    savedRequests.push(eventName);
-    localStorage.setItem("eventRequests", JSON.stringify(savedRequests));
+    savedRequests.push(eventName); // add to array
+    localStorage.setItem("eventRequests", JSON.stringify(savedRequests)); // save it
 
-    renderRequests();
+    renderRequests(); // update the list
 
-    input.value = "";
+    input.value = ""; // clear the box
 
+    // show the little green "added" message
     let msg = document.getElementById("eventMessage");
     msg.style.display = "block";
-    setTimeout(() => msg.style.display = "none", 1500);
+
+    // hide it after 1.5 seconds
+    setTimeout(() => {
+        msg.style.display = "none";
+    }, 1500);
 });

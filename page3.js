@@ -1,16 +1,21 @@
-// my coordinates in decimal
+// ===============================
+// MAP SETUP
+// center the map on my coordinates
+// ===============================
 var lat = 39.730286;
 var lng = -90.246772;
 
-// center the map on my spot
+// make the map + center it
 var map = L.map('map').setView([lat, lng], 15);
 
-// load the map tiles
+// load the map tiles (basic OSM layer)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// updated bounds so the bottom of campus shows and the box stays square-ish
+// ===============================
+// MAP BOUNDS (so you can't scroll off campus)
+// ===============================
 var bounds = L.latLngBounds(
     [39.7335, -90.2525], // top-left
     [39.7250, -90.2400]  // bottom-right (extended lower)
@@ -22,7 +27,11 @@ map.setMaxBounds(bounds);
 // stop zooming out too far
 map.setMinZoom(16);
 
-// fill the dropdowns
+
+// ===============================
+// DROPDOWN SETUP
+// fill the dropdowns with building names
+// ===============================
 function populateDropdowns() {
     let start = document.getElementById("startSelect");
     let end = document.getElementById("endSelect");
@@ -30,11 +39,13 @@ function populateDropdowns() {
     for (let key in buildings) {
         let b = buildings[key];
 
+        // start option
         let o1 = document.createElement("option");
         o1.value = key;
         o1.textContent = b.name;
         start.appendChild(o1);
 
+        // end option
         let o2 = document.createElement("option");
         o2.value = key;
         o2.textContent = b.name;
@@ -45,10 +56,14 @@ function populateDropdowns() {
 let startMarker = null;
 let endMarker = null;
 
-// put a marker on the map
+
+// ===============================
+// PLACE MARKERS
+// drop a pin when a building is selected
+// ===============================
 function placeMarker(key, isStart) {
     let b = buildings[key];
-    if (!b) return;
+    if (!b) return; // safety check
 
     if (isStart) {
         if (startMarker) map.removeLayer(startMarker);
@@ -59,7 +74,11 @@ function placeMarker(key, isStart) {
     }
 }
 
-// when dropdown changes, drop a pin + update walk box
+
+// ===============================
+// DROPDOWN LISTENERS
+// when user picks a building → drop pin + update walk time
+// ===============================
 document.getElementById("startSelect").addEventListener("change", function() {
     if (this.value !== "") placeMarker(this.value, true);
     updateWalkBox();
@@ -70,12 +89,13 @@ document.getElementById("endSelect").addEventListener("change", function() {
     updateWalkBox();
 });
 
-// run it
+// run dropdown fill on load
 populateDropdowns();
 
 
 // ===============================
 // WEATHER CODE → TEXT
+// converts weathercode numbers into readable text
 // ===============================
 function getWeatherText(code) {
     if (code >= 0 && code <= 3) return "Clear / Cloudy";
@@ -92,6 +112,7 @@ function getWeatherText(code) {
 
 // ===============================
 // WEATHER FUNCTION
+// pulls Jacksonville weather from Open-Meteo
 // ===============================
 function loadWeather() {
     const url = "https://api.open-meteo.com/v1/forecast?latitude=39.733&longitude=-90.229&current_weather=true";
@@ -121,25 +142,27 @@ function loadWeather() {
         });
 }
 
+// run weather on load
 loadWeather();
 
 
 // ===============================
-// SIMPLE DISTANCE + WALK TIME
+// DISTANCE + WALK TIME
+// simple rough math (good enough for campus)
 // ===============================
 
-// simple rough distance (meters)
+// rough distance in meters
 function getDistanceRough(lat1, lon1, lat2, lon2) {
     const latDist = Math.abs(lat2 - lat1) * 111000; // meters per degree
     const lonDist = Math.abs(lon2 - lon1) * 85000;  // meters per degree (Illinois)
     return Math.sqrt(latDist * latDist + lonDist * lonDist);
 }
 
-// simple walk time with weather adjustments
+// rough walk time with weather adjustments
 function getWalkTimeRough(distance, weather) {
     let speed = 1.4; // normal walking speed m/s
 
-    // wind slows you down a bit
+    // wind slows you down
     if (weather.windspeed > 15) speed -= 0.2;
     if (weather.windspeed > 25) speed -= 0.3;
 
@@ -157,7 +180,11 @@ function getWalkTimeRough(distance, weather) {
     return Math.round(seconds / 60);
 }
 
-// update the walk time box
+
+// ===============================
+// UPDATE WALK BOX
+// updates distance + time when both markers exist
+// ===============================
 function updateWalkBox() {
     if (!startMarker || !endMarker) return;
 
