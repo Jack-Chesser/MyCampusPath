@@ -97,3 +97,27 @@ body {
     font-weight: bold;
     margin-left: 10px;
 }
+
+/* for phone*/
+@media (max-width: 600px) {
+    #weekGrid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on phones */
+    }
+}
+@media (max-width: 600px) {
+    #map {
+        height: 400px !important;
+    }
+}
+@media (max-width: 600px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 600px) {
+    .card {
+        padding: 15px !important;
+    }
+}
+
